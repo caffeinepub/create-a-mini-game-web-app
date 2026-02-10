@@ -1,0 +1,152 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Mini game web app (single-player) with Internet Identity and leaderboard",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement a fully playable browser mini game with deterministic scoring, start/play/end flow, and replay.",
+      "acceptanceCriteria": [
+        "A user can start a new game session from the UI.",
+        "The game provides live feedback during play (e.g., score and/or time remaining).",
+        "A game session ends with a visible result screen/state showing the final score and an option to play again.",
+        "The game is fully playable in the browser without requiring external services."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/game/types.ts",
+          "operation": "create",
+          "description": "Define game state types (phase, timer, score, objective counters) for the mini game to ensure deterministic scoring and predictable UI rendering."
+        },
+        {
+          "path": "frontend/src/game/useMiniGame.ts",
+          "operation": "create",
+          "description": "Implement the mini game core logic as a React hook (new session, deterministic scoring rules, tick/timer loop, win/lose/end condition, and live HUD values)."
+        },
+        {
+          "path": "frontend/src/screens/GameScreen.tsx",
+          "operation": "create",
+          "description": "Create the start/gameplay/results UI in one navigable screen with clear objective messaging, live score/time feedback, and a results state offering Play Again."
+        },
+        {
+          "path": "frontend/src/components/GameBoard.tsx",
+          "operation": "create",
+          "description": "Implement the interactive game board component (click/tap interactions that drive deterministic score changes) used by GameScreen."
+        },
+        {
+          "path": "frontend/src/components/GameHud.tsx",
+          "operation": "create",
+          "description": "Add a HUD component to display live gameplay feedback such as score, time remaining, and objective progress in English."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Add the app shell that wires the GameScreen into the rendered app and provides navigation to other required views (e.g., leaderboard) so the game is reachable. Use shadcn-ui components (e.g., Button/Card) to build consistent UI; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add optional Internet Identity sign-in/out UI and allow signed-in players to submit their final score at game end.",
+      "acceptanceCriteria": [
+        "The UI shows a sign-in option using Internet Identity and reflects signed-in vs signed-out state.",
+        "When signed in, the end-of-game UI includes a control to submit the final score.",
+        "When signed out, score submission is disabled or prompts sign-in."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AuthStatus.tsx",
+          "operation": "create",
+          "description": "Create an authentication status control that uses the existing Internet Identity provider hook to show signed-in vs signed-out state and offer Sign in/Sign out actions. Use shadcn-ui components (e.g., Button/DropdownMenu) for the control UI; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/services/backendClient.ts",
+          "operation": "create",
+          "description": "Create a small frontend backend-client wrapper that uses core-infrastructure configuration to call backend capabilities (registerScore/getLeaderboard/getBestScore) and supports authenticated calls when an Internet Identity is present."
+        },
+        {
+          "path": "frontend/src/services/scoreSubmission.ts",
+          "operation": "create",
+          "description": "Implement score submission orchestration for the results screen (disabled when signed out; submits final score as bigint when signed in; surfaces readable English errors)."
+        },
+        {
+          "path": "frontend/src/screens/GameScreen.tsx",
+          "operation": "modify",
+          "description": "Integrate Internet Identity UI state into the end-of-game results area: show sign-in prompt when signed out; show Submit Score control when signed in; ensure submission uses deterministic final score from gameplay. Use shadcn-ui components (e.g., Button/Alert) for consistent UI; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire AuthStatus into the app header/layout so sign-in is visible across screens. Use shadcn-ui components (e.g., Card/Separator) for layout consistency; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add a leaderboard UI view that fetches and displays top scores and refreshes after score submission with loading/error states.",
+      "acceptanceCriteria": [
+        "The UI includes a leaderboard section/page that loads and displays top scores from the backend.",
+        "After submitting a score, the leaderboard can be refreshed and reflects the new entry when applicable.",
+        "Leaderboard loading and error states are handled in the UI (e.g., loading indicator and a readable error message in English)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useLeaderboard.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for fetching the leaderboard from backend capability and for refetching/invalidation after a successful score submission."
+        },
+        {
+          "path": "frontend/src/screens/LeaderboardScreen.tsx",
+          "operation": "create",
+          "description": "Implement the leaderboard view UI to display top scores (principal + score) with explicit loading and English error states and an explicit Refresh control. Use shadcn-ui components (e.g., Table/Skeleton/Button) to build the list UI; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/services/scoreSubmission.ts",
+          "operation": "modify",
+          "description": "After successful score submission, trigger leaderboard refresh behavior (e.g., React Query invalidation) so the UI can update when applicable."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire LeaderboardScreen into app navigation (e.g., simple tabs/buttons) so it is reachable without adding unnecessary routes. Use shadcn-ui components (e.g., Tabs/ButtonGroup) for navigation UI; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Apply a cohesive creative theme across start/gameplay/results/leaderboard screens with a non-blue/purple primary palette and responsive layout.",
+      "acceptanceCriteria": [
+        "The app has a consistent look-and-feel across all screens with a defined primary/secondary palette that is not predominantly blue/purple.",
+        "User-facing text is in English and is consistent in tone and style.",
+        "The layout is responsive and usable on both mobile and desktop."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add Tailwind base/styles entry plus CSS variables to define a cohesive warm/creative theme (avoid blue/purple primary), consistent typography, and reusable surface/foreground colors across screens."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a responsive layout wrapper (header/content container, spacing, max-width, and screen-safe padding) used by all screens for consistent theme application."
+        },
+        {
+          "path": "frontend/src/screens/GameScreen.tsx",
+          "operation": "modify",
+          "description": "Apply the shared theme and responsive layout conventions (consistent headings, buttons, spacing, and readable English microcopy) across start/gameplay/results states. Use shadcn-ui components for consistent styling; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/screens/LeaderboardScreen.tsx",
+          "operation": "modify",
+          "description": "Apply the shared theme and responsive layout conventions (consistent headings, spacing, list/table styles, and readable English error/loading text). Use shadcn-ui components for consistent styling; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Adopt AppLayout for consistent global look-and-feel and ensure navigation and screen containers remain usable on mobile and desktop. Use shadcn-ui components for consistent styling; verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

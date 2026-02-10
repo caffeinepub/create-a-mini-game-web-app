@@ -1,0 +1,112 @@
+{
+  "kind": "build_request",
+  "title": "Create a mini game web app",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a playable mini game with a clear objective, win/lose (or end) condition, and a score that is calculated deterministically from gameplay.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "I want a mini game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A user can start a new game session from the UI.",
+        "The game provides live feedback during play (e.g., score and/or time remaining).",
+        "A game session ends with a visible result screen/state showing the final score and an option to play again.",
+        "The game is fully playable in the browser without requiring external services."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add an optional Internet Identity sign-in flow that allows a signed-in player to submit their final score at the end of a game session.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "I want a mini game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The UI shows a sign-in option using Internet Identity and reflects signed-in vs signed-out state.",
+        "When signed in, the end-of-game UI includes a control to submit the final score.",
+        "When signed out, score submission is disabled or prompts sign-in."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create backend support to persist high scores per authenticated user and expose methods to (a) submit a score and (b) fetch a leaderboard (top scores).",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "I want a mini game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The backend provides a callable method to submit a score associated with the caller identity.",
+        "The backend provides a callable method to fetch a leaderboard list (e.g., top N entries).",
+        "Scores are persisted across page reloads and canister calls."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add a leaderboard view in the UI that displays the fetched top scores and updates after a score submission.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "I want a mini game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The UI includes a leaderboard section/page that loads and displays top scores from the backend.",
+        "After submitting a score, the leaderboard can be refreshed and reflects the new entry when applicable.",
+        "Leaderboard loading and error states are handled in the UI (e.g., loading indicator and a readable error message in English)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Apply a cohesive, creative visual theme (colors, typography, layout) consistently across the mini game screens (start, gameplay, results, leaderboard). Avoid a blue/purple primary palette.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "I want a mini game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app has a consistent look-and-feel across all screens with a defined primary/secondary palette that is not predominantly blue/purple.",
+        "User-facing text is in English and is consistent in tone and style.",
+        "The layout is responsive and usable on both mobile and desktop."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not modify any files under frontend/src/components/ui or any immutable paths listed in SYSTEM_CONTEXT.",
+    "Use English for all user-facing text."
+  ],
+  "nonGoals": [
+    "Real-time multiplayer or chat features.",
+    "Third-party authentication providers other than Internet Identity.",
+    "External database or non-Internet-Computer storage dependencies."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

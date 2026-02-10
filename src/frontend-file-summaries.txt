@@ -1,0 +1,14 @@
+{
+  "frontend/src/App.tsx": "Main application component with tab navigation between game and leaderboard screens, header with auth status, and footer with attribution.",
+  "frontend/src/screens/GameScreen.tsx": "Game screen component managing game states (idle/playing/game over), displaying appropriate UI for each phase, and handling score submission with Internet Identity integration.",
+  "frontend/src/screens/LeaderboardScreen.tsx": "Leaderboard screen displaying top scores from backend with loading/error states, rank icons for top 3 players, and refresh functionality.",
+  "frontend/src/components/AuthStatus.tsx": "Authentication status component showing sign-in button when logged out or user dropdown menu with principal and sign-out option when logged in.",
+  "frontend/src/components/GameBoard.tsx": "Interactive game board component rendering four colored tiles with active state animations and click handling.",
+  "frontend/src/components/GameHud.tsx": "Heads-up display component showing current score, round number, remaining lives, and phase-specific status messages during gameplay.",
+  "frontend/src/game/types.ts": "TypeScript type definitions for game state including phases, tiles, and game progress tracking.",
+  "frontend/src/game/useMiniGame.ts": "Custom React hook implementing core game logic including sequence generation, tile activation, player input validation, scoring, and round progression.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for fetching leaderboard data and submitting scores to the backend with automatic cache invalidation.",
+  "frontend/src/index.css": "Global styles with OKLCH color system defining warm coral/orange primary palette and teal accent colors for both light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom color tokens, Inter font family, and extended design system matching the warm color palette.",
+  "frontend/src/lib/utils.ts": "Utility function for merging Tailwind CSS classes with clsx and tailwind-merge."
+}

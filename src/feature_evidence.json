@@ -1,0 +1,88 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-a-playable-mini-game-with-a-clear-objective-win-lose-or-end-condition-and-a-score-that-is-calculated-deterministically-from-gameplay",
+      "featureTitle": "Implement a playable mini game with a clear objective, win/lose (or end) condition, and a score that is calculated deterministically from gameplay.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/GameBoard.tsx",
+        "frontend/src/components/GameHud.tsx",
+        "frontend/src/game/types.ts",
+        "frontend/src/game/useMiniGame.ts",
+        "frontend/src/screens/GameScreen.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-optional-internet-identity-sign-in-flow-that-allows-a-signed-in-player-to-submit-their-final-score-at-the-end-of-a-game-session",
+      "featureTitle": "Add an optional Internet Identity sign-in flow that allows a signed-in player to submit their final score at the end of a game session.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AuthStatus.tsx",
+        "frontend/src/screens/GameScreen.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-leaderboard-view-in-the-ui-that-displays-the-fetched-top-scores-and-updates-after-a-score-submission",
+      "featureTitle": "Add a leaderboard view in the UI that displays the fetched top scores and updates after a score submission.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/screens/LeaderboardScreen.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-cohesive-creative-visual-theme-colors-typography-layout-consistently-across-the-mini-game-screens-start-gameplay-results-leaderboard-avoid-a-blue-purple-primary-palette",
+      "featureTitle": "Apply a cohesive, creative visual theme (colors, typography, layout) consistently across the mini game screens (start, gameplay, results, leaderboard). Avoid a blue/purple primary palette.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/index.css",
+        "frontend/src/screens/GameScreen.tsx",
+        "frontend/src/screens/LeaderboardScreen.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

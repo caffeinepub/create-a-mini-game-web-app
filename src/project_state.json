@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a mini game app.",
+  "existing_features": [
+    {
+      "id": "feature-implement-a-playable-mini-game-with-a-clear-objective-win-lose-or-end-condition-and-a-score-that-is-calculated-deterministically-from-gameplay",
+      "title": "Implement a playable mini game with a clear objective, win/lose (or end) condition, and a score that is calculated deterministically from gameplay.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-optional-internet-identity-sign-in-flow-that-allows-a-signed-in-player-to-submit-their-final-score-at-the-end-of-a-game-session",
+      "title": "Add an optional Internet Identity sign-in flow that allows a signed-in player to submit their final score at the end of a game session.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-leaderboard-view-in-the-ui-that-displays-the-fetched-top-scores-and-updates-after-a-score-submission",
+      "title": "Add a leaderboard view in the UI that displays the fetched top scores and updates after a score submission.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-creative-visual-theme-colors-typography-layout-consistently-across-the-mini-game-screens-start-gameplay-results-leaderboard-avoid-a-blue-purple-primary-palette",
+      "title": "Apply a cohesive, creative visual theme (colors, typography, layout) consistently across the mini game screens (start, gameplay, results, leaderboard). Avoid a blue/purple primary palette.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a mini game.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Create backend support to persist high scores per authenticated user and expose methods to (a) submit a score and (b) fetch a leaderboard (top scores).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    }
+  ],
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "projectName": "Create a mini game web app",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

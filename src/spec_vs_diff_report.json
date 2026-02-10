@@ -1,0 +1,63 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-04T21:31:25.209Z",
+  "summary": "Implemented a Memory Master mini-game UI with Internet Identity sign-in, score submission, and a leaderboard view, plus a Motoko backend with score registration and leaderboard retrieval. However, backend score persistence across canister upgrades/restarts is not evidenced, and some extra backend/UI behaviors were added beyond the request.",
+  "missing_requirements": [
+    {
+      "id": "REQ-3",
+      "requirement": "Scores are persisted across page reloads and canister calls (persist high scores per authenticated user).",
+      "reason": "The backend stores scores in an in-memory `let scores = Map.empty<Principal, Nat>()` without any `stable` storage or upgrade hooks; this does not evidence persistence across canister upgrades/redeploys and may not meet the persistence intent beyond the canister’s in-memory lifetime.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Backend method `getBestScore()` exposed for caller’s personal best score.",
+      "reason": "BuildRequest only asked for (a) submit score and (b) fetch leaderboard; no requirement mentions a separate \"get best score\" endpoint.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Score submission rejects non-improving scores by trapping with an error (must be higher than existing personal best).",
+      "reason": "The request did not specify rejection behavior; it only required persisting high scores and exposing submission/fetch methods. This enforces an extra rule not stated in requirements.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "UI footer includes external attribution/link to caffeine.ai.",
+      "reason": "Not requested by any requirement and introduces an external link/branding element unrelated to the mini-game, auth, or leaderboard requirements.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AuthStatus.tsx",
+    "frontend/src/components/GameBoard.tsx",
+    "frontend/src/components/GameHud.tsx",
+    "frontend/src/game/types.ts",
+    "frontend/src/game/useMiniGame.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/screens/GameScreen.tsx",
+    "frontend/src/screens/LeaderboardScreen.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

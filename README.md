@@ -1,2 +1,3 @@
-# create-a-mini-game-web-app
-Exported from Caffeine project: Create a mini game web app
+## Create a mini game web app
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
